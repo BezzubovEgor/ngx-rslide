@@ -1,0 +1,11 @@
+<div #slider class="slider">
+  <div class="line">
+    <div class="colorline" [style.left.%]="getMin()" [style.width.%]="getMax() - getMin()" ></div>
+    <ng-container *ngFor="let thumb of thumbs; let i = index">
+      <div class="circle" tabindex="0" [style.left.%]="thumb.val" [attr.data-value]="mapThumbToValue(thumb)"
+        (mousedown)="mousedown($event, thumb)"
+        (focus)="focus($event, thumb)">
+      </div>
+    </ng-container>
+  </div>
+</div>

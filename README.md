@@ -1,27 +1,80 @@
-# NgxRslide
+# ngx-rslide
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+## Installation
 
-## Development server
+To install slider, run:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```bash
+$ npm install ngx-rslide --save
+```
 
-## Code scaffolding
+## Using slider
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+You can import slider module in any Angular application by running:
 
-## Build
+```bash
+$ npm install ngx-rslide --save
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+and then add `SliderModule` in your module, for example `AppModule`:
 
-## Running unit tests
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppComponent } from './app.component';
+// import SliderModule
+import { SliderModule } from './modules/slider/slider.module';
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    // Declare SliderModule in the 'imports' section of your module
+    SliderModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+```
 
-## Further help
+Once slider is imported, you can use it in your Angular application:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+`app.component.html`:
+
+```xml
+<ngx-rslide [step]="5" [min]="20" [max]="60" [(values)]="values"></ngx-rslide>
+```
+
+`app.component.ts`:
+
+```typescript
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  values = [0, 50];
+}
+```
+
+## Common API
+
+| Property | Description | Default | Type |
+|:---|:---|:---|:---|
+|`@Input() min`          | The minimum value of the slider | `0` | `number` / `null` |
+|`@Input() max`          | The minimum value of the slider | `100` | `number` / `null`
+|`@Input() step`         | The values at which the thumb will snap | `1` | `number` / `null`
+|`@Input() values`       | Values of slider | `[0]` | `Array<number>` / `null`
+|`@Output() valuesChange`| Event emitted when the slider values has changed | | `EventEmitter<Array<number>>`
+
+## License
+
+MIT © [bezzubov egor](mailto:bezzubov.egor@gmail.com)
